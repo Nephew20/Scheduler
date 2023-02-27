@@ -22,15 +22,25 @@ $(function () {
   for(i=0; i<10; i++) {
     var divEl = $('<div>')
     var textArea = $('<textarea>')
+    var button = $('<button>')
+    var iEl = $('<i>')
     
     divEl.addClass('row','time-block', 'col-2', 'col-md-1', 'hour', 'text-center', 'py-3')
     divEl.text(time)
-    
+
     textArea.addClass('col-8' ,'col-md-10', 'description')
     textArea.attr('rows', '3')
     
+    button.addClass(['btn', 'saveBtn', 'col-2', 'col-md-1'])
+    button.attr('aria-label', 'save')
+
+    iEl.addClass(['fas', 'fa-save'])
+    iEl.attr('aria-hidden', 'true')
+
     hoursEl.append(divEl)
     divEl.append(textArea)
+    button.append(iEl)
+    divEl.append(button)
 
   }
 

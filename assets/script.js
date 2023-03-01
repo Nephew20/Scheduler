@@ -17,16 +17,14 @@ $(function () {
   // current hour in 24-hour time?
   
   var hoursEl = $('#hours');
-  var time = dayjs().format('h a');
-
-  for(i=0; i<10; i++) {
+  
+  for(i=0; i<9; i++) {
     var divEl = $('<div>')
     var textArea = $('<textarea>')
     var button = $('<button>')
     var iEl = $('<i>')
-    
-    divEl.addClass('row','time-block', 'col-2', 'col-md-1', 'hour', 'text-center', 'py-3')
-    divEl.text(time)
+    var time = dayjs().hour(i+9).minute(0).format('h A')
+    var currentTime = dayjs()
 
     textArea.addClass('col-8' ,'col-md-10', 'description')
     textArea.attr('rows', '3')
@@ -36,14 +34,25 @@ $(function () {
 
     iEl.addClass(['fas', 'fa-save'])
     iEl.attr('aria-hidden', 'true')
-
+ 
+    divEl.addClass('row', 'time-block', 'col-2', 'col-md-1', 'hour', 'text-center', 'py-3')
+    divEl.text(time)
+     
+    if (currentTime.isBefore(time, 'h')) {
+      divEl.css('color', 'past')
+    } else if (dayjs().isSame(time, 'h')) {
+      divEl.css('color', 'present')
+    } else if (dayjs().isAfter(time, 'h')) {
+      divEl.css('color', 'future')
+    }
+    
     hoursEl.append(divEl)
     divEl.append(textArea)
     button.append(iEl)
     divEl.append(button)
-
   }
 
+   
 
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id

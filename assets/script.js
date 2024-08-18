@@ -23,33 +23,31 @@ $(function () {
     var textArea = $('<textarea>')
     var button = $('<button>')
     var iEl = $('<i>')
-    var time = dayjs().hour(i+9).minute(0).format('h A')
+    var hour = dayjs().hour(i+9).minute(0).format('h A')
     var currentTime = dayjs()
 
-    textArea.addClass('col-8' ,'col-md-10', 'description')
-    textArea.attr('rows', '3')
-    
-    button.addClass(['btn', 'saveBtn', 'col-2', 'col-md-1'])
-    button.attr('aria-label', 'save')
+    console.log(currentTime)
 
-    iEl.addClass(['fas', 'fa-save'])
-    iEl.attr('aria-hidden', 'true')
+    textArea.addClass('col-8 col-md-10 description').attr('rows', '3')
+    
+    button.addClass('btn saveBtn col-2 col-md-1').attr('aria-label', 'save')
+
+    iEl.addClass('fas fa-save').attr('aria-hidden', 'true')
  
-    divEl.addClass('row', 'time-block', 'col-2', 'col-md-1', 'hour', 'text-center', 'py-3')
-    divEl.text(time)
+    divEl.addClass('row  time-block hour text-center ps-10').attr('id', 'hour-' + i)
+    
+    var hourLabel = $('<div>').addClass('col-2 col-md-1 hour text-center').text(hour)
      
-    if (currentTime.isBefore(time, 'h')) {
+    if (currentTime.isBefore(hour, 'h')) {
       divEl.css('color', 'past')
-    } else if (dayjs().isSame(time, 'h')) {
+    } else if (dayjs().isSame(hour, 'h')) {
       divEl.css('color', 'present')
-    } else if (dayjs().isAfter(time, 'h')) {
+    } else if (dayjs().isAfter(hour, 'h')) {
       divEl.css('color', 'future')
     }
     
+    divEl.append(hourLabel, textArea, button)
     hoursEl.append(divEl)
-    divEl.append(textArea)
-    button.append(iEl)
-    divEl.append(button)
   }
 
    

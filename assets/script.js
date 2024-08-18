@@ -10,12 +10,6 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  
   var hoursEl = $('#hours');
   
   for(i=0; i<9; i++) {
@@ -24,9 +18,9 @@ $(function () {
     var button = $('<button>')
     var iEl = $('<i>')
     var hour = dayjs().hour(i+9).minute(0).format('h A')
-    var currentTime = dayjs()
+    var currentHour = dayjs().hour()
 
-    console.log(currentTime)
+    console.log(currentHour)
 
     textArea.addClass('col-8 col-md-10 description').attr('rows', '3')
     
@@ -34,16 +28,20 @@ $(function () {
 
     iEl.addClass('fas fa-save').attr('aria-hidden', 'true')
  
-    divEl.addClass('row  time-block hour text-center ps-10').attr('id', 'hour-' + i)
+    divEl.addClass('row  time-block hour text-center ps-10').attr('id', 'hour-' + (i+9))
     
     var hourLabel = $('<div>').addClass('col-2 col-md-1 hour text-center').text(hour)
+
+    button.append(iEl)
+
+    console.log($('#hour-' + (i+9)))
      
-    if (currentTime.isBefore(hour, 'h')) {
-      divEl.css('color', 'past')
-    } else if (dayjs().isSame(hour, 'h')) {
-      divEl.css('color', 'present')
-    } else if (dayjs().isAfter(hour, 'h')) {
-      divEl.css('color', 'future')
+    if ( (i+9) < currentHour) {
+      divEl.addClass('past')
+    } else if ( (i+9) === currentHour) {
+      divEl.addClass('present')
+    } else {
+      divEl.addClass('future')
     }
     
     divEl.append(hourLabel, textArea, button)

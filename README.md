@@ -6,7 +6,9 @@ Planning your day is essential if you want to make sure that you are getting thi
 
 ## Installation 
  
-No steps are required for installation
+- git clone repo
+- cd /to/file/path
+- code .
 
 ## Usage 
 
@@ -14,7 +16,7 @@ Key in your desired information on the text box and click the save button to sto
 
 Link to website: https://nephew20.github.io/Scheduler/
 
-![website-screenshot!](/Scheduler/assets/Work%20Scheduler%20Screenshot.JPG "Scheduler")
+![website-screenshot](./assets/Work%20Scheduler%20Screenshot.JPG)
 
 ## Credits 
 
